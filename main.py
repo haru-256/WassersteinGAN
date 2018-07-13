@@ -123,9 +123,19 @@ def weights_init(m):
     classname = m.__class__.__name__
     if classname.find('Conv') != -1:
         m.weight.data.normal_(0.0, 0.02)
+        print(m)
+        print("mean: {0}, std: {1}".format(
+            m.weight.data.mean(), m.weight.data.std()))
+        print()
     elif classname.find('BatchNorm') != -1:
         m.weight.data.normal_(1.0, 0.02)
         m.bias.data.fill_(0)
+        print(m)
+        print("mean: {0}, std: {1}".format(
+            m.weight.data.mean(), m.weight.data.std()))
+        print()
+    else:
+        print(classname)
 
 
 if opt.noBN:
